@@ -1,15 +1,28 @@
-# Ignore Play! working directory #
-bin/
-/db
-.eclipse
-/lib/
-/logs/
-/modules
-/project/target
-/target
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+
+### PlayFramework and SBT ###
 tmp/
-test-result
-server.pid
-*.eml
-/dist/
+logs
+target
+.eclipse
+.idea
+.idea_modules
+.classpath
+.project
+.settings
 .cache
+.history
+.lib/
+/RUNNING_PID
+/modules
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/

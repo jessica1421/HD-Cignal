@@ -8,7 +8,7 @@ import errors._
 
 @Singleton
 class BusinessTypeService @Inject()(
-    businessTypeRepo: models.repo.BusinessTypeRepo,
+    protected val businessTypeRepo: models.repo.BusinessTypeRepo,
     protected val dbConfigProvider: DatabaseConfigProvider,
     protected implicit val ec: ExecutionContext)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {

@@ -4,19 +4,23 @@ import scala.concurrent.{ ExecutionContext, Future }
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import cats.data.{ OptionT, EitherT}
 import cats.implicits._
-import models.domain.Region
+import models.domain.{ Country, Region }
 import errors._
 
 @Singleton
 class RegionService @Inject()(
-    countryRepo: models.repo.CountryRepo,
-    regionRepo: models.repo.RegionRepo,
-    regionDAO: models.dao.RegionDAO,
+    protected val countryDAO: models.dao.CountryDAO,
+    protected val regionDAO: models.dao.RegionDAO,
+    protected val countryRepo: models.repo.CountryRepo,
+    protected val regionRepo: models.repo.RegionRepo,
     protected val dbConfigProvider: DatabaseConfigProvider,
     protected implicit val ec: ExecutionContext)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
   private val logger = play.api.Logger(this.getClass())
+
+  def getByCountry(idCountry: Int): Future[Seq[(Country, Region)]] =
+    db.run((countryDAO.query(idCountry) join regionDAO.query on(_.id === _.idCountry)).result)
 
   def add(region: Region): EitherT[Future, Error, Int] = {
     for {

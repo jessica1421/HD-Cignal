@@ -8,7 +8,7 @@ import errors._
 
 @Singleton
 class VatService @Inject()(
-    vatRepo: models.repo.VatRepo,
+    protected val vatRepo: models.repo.VatRepo,
     protected val dbConfigProvider: DatabaseConfigProvider,
     protected implicit val ec: ExecutionContext)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {

@@ -8,7 +8,7 @@ import errors._
 
 @Singleton
 class ContactInfoService @Inject()(
-    contactInfoRepo: models.repo.ContactInfoRepo,
+    protected val contactInfoRepo: models.repo.ContactInfoRepo,
     protected val dbConfigProvider: DatabaseConfigProvider,
     protected implicit val ec: ExecutionContext)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {

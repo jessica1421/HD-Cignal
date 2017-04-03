@@ -8,8 +8,8 @@ import errors._
 
 @Singleton
 class CountryService @Inject()(
-    countryDAO: models.dao.CountryDAO,
-    countryRepo: models.repo.CountryRepo,
+    protected val countryDAO: models.dao.CountryDAO,
+    protected val countryRepo: models.repo.CountryRepo,
     protected val dbConfigProvider: DatabaseConfigProvider,
     protected implicit val ec: ExecutionContext)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {

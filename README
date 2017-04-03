@@ -1,1 +1,13 @@
-# # #
+# HD-Cignal API Application
+
+---
+
+## Installation
+
+### Database
+
+`createuser hdsignal`
+
+`createdb --encoding=UTF8 --owner=hdsignal hdsignal`
+
+---

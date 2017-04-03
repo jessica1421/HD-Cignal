@@ -33,6 +33,16 @@ class MunicipalityRepo @Inject()(
   def updateProvince(id: Int, idProvince: Int): Future[Boolean] =
     db.run(dao.query(id).map(_.idProvince).update(idProvince).map( _ > 0))
 
+  def update(id: Int, newName: Option[String], newAreaCode: Option[Int], newIdProvince: Option[Int])
+    : Future[Unit] = db.run {
+    DBIO.seq(Seq(
+      newName.map(dao.query(id).map(_.name).update(_)),
+      newAreaCode.map(dao.query(id).map(_.areacode).update(_)),
+      newIdProvince.map(dao.query(id).map(_.idProvince).update(_)))
+    .collect({ case Some(action) => action}):_*)
+  }
+
   def delete(id: Int): Future[Int] =
     db.run(dao.query(id).delete)
+
 }

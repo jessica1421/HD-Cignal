@@ -32,4 +32,3 @@ final private[models] class RegionDAO @Inject()(
     @inline def apply(id: Int) = this.withFilter(_.id === id)
   }
 }
-

@@ -20,6 +20,9 @@ final private[models] class MunicipalityDAO @Inject()(
 
     def * = (name, areacode, idProvince, id.?) <> (Municipality.tupled, Municipality.unapply)
 
+    def idxIdAreaCode =
+      index(s"IDX_AREA_CODE_$tableName", areacode, unique = true)
+
     def province = foreignKey(
       s"FK_PROVINCES_${tableName}",
       idProvince,
@@ -27,7 +30,6 @@ final private[models] class MunicipalityDAO @Inject()(
       _.id,
       onUpdate = ForeignKeyAction.Cascade,
       onDelete = ForeignKeyAction.Restrict)
-
   }
 
   private[models] object query extends TableQuery(new MunicipalityTable(_)) {

@@ -30,6 +30,14 @@ class ProvinceRepo @Inject()(
   def updateRegion(id: Int, idRegion: Int): Future[Boolean] =
     db.run(dao.query(id).map(_.idRegion).update(idRegion).map( _ > 0))
 
+  def update(id: Int, newIdRegion: Option[Int], newName: Option[String])
+    : Future[Unit] = db.run {
+    DBIO.seq(Seq(
+      newIdRegion.map(dao.query(id).map(_.idRegion).update(_)),
+      newName.map(dao.query(id).map(_.name).update(_)))
+    .collect({ case Some(action) => action}):_*)
+  }
+
   def delete(id: Int): Future[Int] =
     db.run(dao.query(id).delete)
 }

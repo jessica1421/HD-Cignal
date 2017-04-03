@@ -30,6 +30,14 @@ class RegionRepo @Inject()(
   def updateCountry(id: Int, idCountry: Int): Future[Boolean] =
     db.run(dao.query(id).map(_.idCountry).update(idCountry).map( _ > 0))
 
+  def update(id: Int, newIdCountry: Option[Int], newName: Option[String])
+    : Future[Unit] = db.run {
+    DBIO.seq(Seq(
+      newIdCountry.map(dao.query(id).map(_.idCountry).update(_)),
+      newName.map(dao.query(id).map(_.name).update(_)))
+    .collect({ case Some(action) => action}):_*)
+  }
+
   def delete(id: Int): Future[Int] =
     db.run(dao.query(id).delete)
 }

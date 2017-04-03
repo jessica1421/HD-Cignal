@@ -6,8 +6,8 @@
 
 ### Database
 
-`createuser hdsignal`
+`createuser my-test`
 
-`createdb --encoding=UTF8 --owner=hdsignal hdsignal`
+`createdb --encoding=UTF8 --owner=my-test my-test`
 
 ---

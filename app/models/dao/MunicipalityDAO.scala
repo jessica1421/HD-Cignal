@@ -7,6 +7,7 @@ import models.domain.Municipality
 
 @Singleton
 final private[models] class MunicipalityDAO @Inject()(
+    protected val provinceDAO: ProvinceDAO,
     protected val dbConfigProvider: DatabaseConfigProvider)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
@@ -18,6 +19,15 @@ final private[models] class MunicipalityDAO @Inject()(
     def id = column[Int]("ID", O.PrimaryKey)
 
     def * = (name, areacode, idProvince, id.?) <> (Municipality.tupled, Municipality.unapply)
+
+    def province = foreignKey(
+      s"FK_PROVINCES_${tableName}",
+      idProvince,
+      provinceDAO.query)(
+      _.id,
+      onUpdate = ForeignKeyAction.Cascade,
+      onDelete = ForeignKeyAction.Restrict)
+
   }
 
   private[models] object query extends TableQuery(new MunicipalityTable(_)) {

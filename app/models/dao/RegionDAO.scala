@@ -7,6 +7,7 @@ import models.domain.Region
 
 @Singleton
 final private[models] class RegionDAO @Inject()(
+    protected val countryDAO: CountryDAO,
     protected val dbConfigProvider: DatabaseConfigProvider)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
@@ -17,6 +18,14 @@ final private[models] class RegionDAO @Inject()(
     def id = column[Int]("ID", O.PrimaryKey)
 
     def * = (name, idCountry, id.?) <> (Region.tupled, Region.unapply)
+
+    def country = foreignKey(
+      s"FK_COUNTRIES_${tableName}",
+      idCountry,
+      countryDAO.query)(
+      _.id,
+      onUpdate = ForeignKeyAction.Cascade,
+      onDelete = ForeignKeyAction.Restrict)
   }
 
   private[models] object query extends TableQuery(new RegionTable(_)) {

@@ -51,10 +51,12 @@ class ContactInfoService @Inject()(
     }}
   }
 
-  def update(id: Int, newName: String): OptionT[Future, Error] = OptionT {
+  def update(contactInfo: ContactInfo): OptionT[Future, Error] = OptionT {
+    val id = contactInfo.id
+    val newName = contactInfo.name
     contactInfoRepo.exists(id) flatMap {exists =>
       if (exists) {
-        contactInfoRepo.update(id, newName) map { success =>
+        contactInfoRepo.update(contactInfo) map { success =>
           if (success) {
             logger.debug(s"ContactInfo $id updated")
             None

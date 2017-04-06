@@ -24,8 +24,8 @@ class CountryRepo @Inject()(
   def add(country: Country): Future[Int] =
     db.run((dao.query returning dao.query.map(_.id)) += country)
 
-  def update(id: Int, newName: String): Future[Boolean] =
-    db.run(dao.query(id).map(_.name).update(newName).map( _ > 0))
+  def update(country: Country): Future[Boolean] =
+    db.run(dao.query(country.id).map(_.name).update(country.name).map( _ > 0))
 
   def delete(id: Int): Future[Int] =
     db.run(dao.query(id).delete)

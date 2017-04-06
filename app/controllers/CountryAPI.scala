@@ -11,28 +11,29 @@ import play.api.i18n.{ I18nSupport, MessagesApi }
 import scala.concurrent.{ ExecutionContext, Future }
 
 import cats.implicits._
-import models.service.BusinessTypeService
-import models.repo.BusinessTypeRepo
-import models.domain.BusinessType
+import models.service.CountryService
+import models.repo.CountryRepo
+import models.domain.Country
 import errors._
 
 @Singleton
-class BusinessTypeAPI @Inject() (
+class CountryAPI @Inject() (
   val messagesApi: MessagesApi,
-  val service: BusinessTypeService,
-  val repo: BusinessTypeRepo,
+  val service: CountryService,
+  val repo: CountryRepo,
   implicit val ec: ExecutionContext
 ) extends Controller with I18nSupport {
 
-  def businessTypeForm = Form(
+  def countryForm = Form(
     mapping(
       "name" -> nonEmptyText,
       "id" -> default(optional(number), None)
-    )(BusinessType.apply)(BusinessType.unapply)
+    )(Country.apply)(Country.unapply)
   )
+  //name: String, optId: Option[Int]
 
-  def add = Action.async { implicit requests =>
-    businessTypeForm.bindFromRequest.fold(
+   def add = Action.async { implicit requests =>
+    countryForm.bindFromRequest.fold(
       formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)),
         service
           .add(_)
@@ -42,7 +43,7 @@ class BusinessTypeAPI @Inject() (
   }
 
   def update = Action.async { implicit requests =>
-    businessTypeForm.bindFromRequest.fold(
+    countryForm.bindFromRequest.fold(
       formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)),
         service
           .update(_)
@@ -61,22 +62,9 @@ class BusinessTypeAPI @Inject() (
     )
   }
 
-  def find = Action.async { implicit requests =>
-    import models.domain.BusinessType.Implicits._
-    Form("id" -> number).bindFromRequest.fold(
-      formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)), {
-        repo
-          .find(_)
-          .map(r => Ok(r.toJson))
-          .getOrElse(NotFound)
-
-      }
-    )
-  }
-
   def all = Action.async { implicit requests =>
-    import models.domain.BusinessType.Implicits._
-    repo.get.map(r => Ok(Json.obj("businessTypes" -> r)))
+    import models.domain.Country.Implicits._
+    repo.get.map(r => Ok(Json.obj("countries" -> r)))
   }
 
 }

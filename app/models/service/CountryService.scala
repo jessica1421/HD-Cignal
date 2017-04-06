@@ -52,10 +52,12 @@ class CountryService @Inject()(
     }}
   }
 
-  def update(id: Int, newName: String): OptionT[Future, Error] = OptionT {
+  def update(country: Country): OptionT[Future, Error] = OptionT {
+    val id = country.id
+    val newName = country.name
     countryRepo.exists(id) flatMap {exists =>
       if (exists) {
-        countryRepo.update(id, newName) map { success =>
+        countryRepo.update(country) map { success =>
           if (success) {
             logger.debug(s"Country $id updated")
             None

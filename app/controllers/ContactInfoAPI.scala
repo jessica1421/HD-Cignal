@@ -11,28 +11,29 @@ import play.api.i18n.{ I18nSupport, MessagesApi }
 import scala.concurrent.{ ExecutionContext, Future }
 
 import cats.implicits._
-import models.service.BusinessTypeService
-import models.repo.BusinessTypeRepo
-import models.domain.BusinessType
+import models.service.ContactInfoService
+import models.repo.ContactInfoRepo
+import models.domain.ContactInfo
 import errors._
 
 @Singleton
-class BusinessTypeAPI @Inject() (
+class ContactInfoAPI @Inject() (
   val messagesApi: MessagesApi,
-  val service: BusinessTypeService,
-  val repo: BusinessTypeRepo,
+  val service: ContactInfoService,
+  val repo: ContactInfoRepo,
   implicit val ec: ExecutionContext
 ) extends Controller with I18nSupport {
 
-  def businessTypeForm = Form(
+  def contactInfoForm = Form(
     mapping(
       "name" -> nonEmptyText,
+      "idCompany" -> number,
       "id" -> default(optional(number), None)
-    )(BusinessType.apply)(BusinessType.unapply)
+    )(ContactInfo.apply)(ContactInfo.unapply)
   )
 
   def add = Action.async { implicit requests =>
-    businessTypeForm.bindFromRequest.fold(
+    contactInfoForm.bindFromRequest.fold(
       formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)),
         service
           .add(_)
@@ -42,7 +43,7 @@ class BusinessTypeAPI @Inject() (
   }
 
   def update = Action.async { implicit requests =>
-    businessTypeForm.bindFromRequest.fold(
+    contactInfoForm.bindFromRequest.fold(
       formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)),
         service
           .update(_)
@@ -62,7 +63,7 @@ class BusinessTypeAPI @Inject() (
   }
 
   def find = Action.async { implicit requests =>
-    import models.domain.BusinessType.Implicits._
+    import models.domain.ContactInfo.Implicits._
     Form("id" -> number).bindFromRequest.fold(
       formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)), {
         repo
@@ -75,8 +76,8 @@ class BusinessTypeAPI @Inject() (
   }
 
   def all = Action.async { implicit requests =>
-    import models.domain.BusinessType.Implicits._
-    repo.get.map(r => Ok(Json.obj("businessTypes" -> r)))
+    import models.domain.ContactInfo.Implicits._
+    repo.get.map(r => Ok(Json.obj("contactInfos" -> r)))
   }
 
 }

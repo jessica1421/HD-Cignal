@@ -3,5 +3,6 @@
 # ~~~~
 
 # A home page
-GET   /                           controllers.HomeController.index
 
+-> /accounting                     accounting.Routes
+-> /location                       location.Routes

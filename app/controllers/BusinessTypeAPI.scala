@@ -16,10 +16,6 @@ import models.repo.BusinessTypeRepo
 import models.domain.BusinessType
 import errors._
 
-/**
- * This controller creates an `Action` to handle HTTP requests to the
- * application's home page.
- */
 @Singleton
 class BusinessTypeAPI @Inject() (
   val messagesApi: MessagesApi,
@@ -80,7 +76,7 @@ class BusinessTypeAPI @Inject() (
 
   def all = Action.async { implicit requests =>
     import models.domain.BusinessType.Implicits._
-    repo.get.map(r => Ok(Json.obj("businessType" -> r)))
+    repo.get.map(r => Ok(Json.obj("businessTypes" -> r)))
   }
 
 }

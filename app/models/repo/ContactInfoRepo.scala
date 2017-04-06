@@ -24,8 +24,8 @@ class ContactInfoRepo @Inject()(
   def add(contactinfo: ContactInfo): Future[Int] =
     db.run((dao.query returning dao.query.map(_.id)) += contactinfo)
 
-  def update(id: Int, newName: String): Future[Boolean] =
-    db.run(dao.query(id).map(_.name).update(newName).map( _ > 0))
+  def update(contactinfo: ContactInfo): Future[Boolean] =
+    db.run(dao.query(contactinfo.id).map(_.name).update(contactinfo.name).map( _ > 0))
 
   def delete(id: Int): Future[Int] =
     db.run(dao.query(id).delete)

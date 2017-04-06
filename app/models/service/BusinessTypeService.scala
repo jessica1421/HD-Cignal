@@ -51,20 +51,20 @@ class BusinessTypeService @Inject()(
     }}
   }
 
-  def update(id: Int, newName: String): OptionT[Future, Error] = OptionT {
-    businessTypeRepo.exists(id) flatMap {exists =>
+  def update(businessType: BusinessType): OptionT[Future, Error] = OptionT {
+    businessTypeRepo.exists(businessType.id) flatMap {exists =>
       if (exists) {
-        businessTypeRepo.update(id, newName) map { success =>
+        businessTypeRepo.update(businessType) map { success =>
           if (success) {
-            logger.debug(s"BusinessType $id updated")
+            logger.debug(s"BusinessType $businessType.id.get updated")
             None
           } else {
-            logger.error(s"Unknown error occurred in updating businessType $id")
+            logger.error(s"Unknown error occurred in updating businessType $businessType.id.get")
             Some(UnknownError)
           }
         }
       } else {
-        logger.debug(s"BusinessType $id NotFound")
+        logger.debug(s"BusinessType $businessType.id.get NotFound")
         Future.successful(Some(ObjectNotExists))
     }}
   }

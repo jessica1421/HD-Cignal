@@ -1,4 +1,4 @@
-®package models.domain
+package models.domain
 
 case class Firm(
     name: String,

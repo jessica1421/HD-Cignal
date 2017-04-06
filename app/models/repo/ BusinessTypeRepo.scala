@@ -24,8 +24,8 @@ class BusinessTypeRepo @Inject()(
   def add(businesstype: BusinessType): Future[Int] =
     db.run((dao.query returning dao.query.map(_.id)) += businesstype)
 
-  def update(id: Int, newName: String): Future[Boolean] =
-    db.run(dao.query(id).map(_.name).update(newName).map( _ > 0))
+  def update(businesstype: BusinessType): Future[Boolean] =
+    db.run(dao.query(businesstype.id).map(_.name).update(businesstype.name).map( _ > 0))
 
   def delete(id: Int): Future[Int] =
     db.run(dao.query(id).delete)

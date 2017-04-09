@@ -1,7 +1,7 @@
 package models.dao
 
 import java.time.Instant
-import javax.inject._
+import javax.inject.{ Inject, Singleton }
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import models.domain.Firm
 

@@ -1,6 +1,5 @@
 package models.dao
 
-import java.util.UUID
 import javax.inject._
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import models.domain.AccountingMethod

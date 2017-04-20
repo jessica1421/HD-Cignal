@@ -1,5 +1,6 @@
 package models.service
-import javax.inject._
+
+import javax.inject.{ Inject, Singleton }
 import scala.concurrent.{ ExecutionContext, Future }
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import cats.data.OptionT

@@ -13,6 +13,8 @@ class SchemaGenerator @Inject()(
     protected val contactInfoDA0: ContactInfoDAO,
     protected val vatDA0: VatDAO,
     protected val businessTypeDA0: BusinessTypeDAO,
+    protected val accountDAO: AccountDAO,
+
     val dbConfigProvider: DatabaseConfigProvider)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
@@ -24,7 +26,8 @@ class SchemaGenerator @Inject()(
       municipalityDA0.query.schema ++
       contactInfoDA0.query.schema ++
       vatDA0.query.schema ++
-      businessTypeDA0.query.schema
+      businessTypeDA0.query.schema ++
+      accountDAO.query.schema
 
     val writer = new java.io.PrintWriter("target/schema.sql")
     writer.write("# --- !Ups\n\n")

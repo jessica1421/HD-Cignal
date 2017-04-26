@@ -1,0 +1,24 @@
+#
+# /accounts
+#
+
+
+GET       /method             controllers.AccountingMethodAPI.all
+GET       /period             controllers.AccountingPeriodAPI.all
+
+# Business Type
+POST      /businesstype       controllers.BusinessTypeAPI.add
+PATCH     /businesstype       controllers.BusinessTypeAPI.update
+DELETE    /businesstype       controllers.BusinessTypeAPI.delete
+GET       /businesstype       controllers.BusinessTypeAPI.find
+GET       /businesstype/all   controllers.BusinessTypeAPI.all
+
+# Contact Info
+POST      /contactinfo        controllers.ContactInfoAPI.add
+PATCH     /contactinfo        controllers.ContactInfoAPI.update
+DELETE    /contactinfo        controllers.ContactInfoAPI.delete
+GET       /contactinfo        controllers.ContactInfoAPI.find
+GET       /contactinfo/all    controllers.ContactInfoAPI.all
+
+# VAT
+GET       /vat                controllers.VatAPI.all

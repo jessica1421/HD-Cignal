@@ -10,7 +10,7 @@ final private[models] class AccountingMethodDAO @Inject()(
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
 
-  protected class AccountingMethodTable(tag: Tag) extends Table[AccountingMethod](tag, "VATS") {
+  protected class AccountingMethodTable(tag: Tag) extends Table[AccountingMethod](tag, "ACCOUNTING_METHODS") {
     def code = column[String]("CODE", O.PrimaryKey)
     def name = column[String]("NAME")
 

@@ -1,0 +1,20 @@
+#
+# /location
+#
+
+# Country
+POST      /country                    controllers.BusinessTypeAPI.add
+PATCH     /country                    controllers.BusinessTypeAPI.update
+DELETE    /country                    controllers.BusinessTypeAPI.delete
+GET       /country                    controllers.BusinessTypeAPI.all
+
+# Municipality
+GET       /municipality/country       controllers.MunicipalityAPI.getByCountry
+GET       /municipality/region        controllers.MunicipalityAPI.getByRegion
+GET       /municipality/province      controllers.MunicipalityAPI.getByProvince
+
+# Province
+GET       /province                   controllers.ProvinceAPI.all
+
+# Region
+GET       /region                     controllers.RegionAPI.all

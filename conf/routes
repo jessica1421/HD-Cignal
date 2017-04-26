@@ -4,5 +4,5 @@
 
 # A home page
 
--> /accounting                     accounting.Routes
+-> /accounts                       accounts.Routes
 -> /location                       location.Routes

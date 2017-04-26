@@ -24,7 +24,7 @@ class MunicipalityAPI @Inject() (
   implicit val ec: ExecutionContext
 ) extends Controller with I18nSupport {
 
-  def contactInfoForm = Form(
+  def municipalityForm = Form(
     mapping(
       "name" -> nonEmptyText,
       "areacode" -> number,

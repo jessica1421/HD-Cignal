@@ -6,28 +6,39 @@ import models.dao._
 
 @Singleton
 class SchemaGenerator @Inject()(
-    protected val countryDA0: CountryDAO,
-    protected val regionDA0: RegionDAO,
-    protected val provinceDA0: ProvinceDAO,
-    protected val municipalityDA0: MunicipalityDAO,
-    protected val contactInfoDA0: ContactInfoDAO,
-    protected val vatDA0: VatDAO,
-    protected val businessTypeDA0: BusinessTypeDAO,
     protected val accountDAO: AccountDAO,
-
+    protected val accClassificationDAO: AccountClassificationDAO,
+    protected val accMethodDAO: AccountingMethodDAO,
+    protected val accPeriodDAO: AccountingPeriodDAO,
+    protected val businessTypeDAO: BusinessTypeDAO,
+    protected val contactInfoDAO: ContactInfoDAO,
+    protected val countryDAO: CountryDAO,
+    protected val firmDAO: FirmDAO,
+    protected val municipalityDAO: MunicipalityDAO,
+    protected val postingMethodDAO: PostingMethodDAO,
+    protected val proprietorDAO: ProprietorDAO,
+    protected val provinceDAO: ProvinceDAO,
+    protected val regionDAO: RegionDAO,
+    protected val vatDAO: VatDAO,
     val dbConfigProvider: DatabaseConfigProvider)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
   def createDDLScript() = {
     val schemas =
-      countryDA0.query.schema ++
-      regionDA0.query.schema ++
-      provinceDA0.query.schema ++
-      municipalityDA0.query.schema ++
-      contactInfoDA0.query.schema ++
-      vatDA0.query.schema ++
-      businessTypeDA0.query.schema ++
-      accountDAO.query.schema
+      accountDAO.query.schema ++
+      accClassificationDAO.query.schema ++
+      accMethodDAO.query.schema ++
+      accPeriodDAO.query.schema ++
+      businessTypeDAO.query.schema ++
+      contactInfoDAO.query.schema ++
+      countryDAO.query.schema ++
+      firmDAO.query.schema ++
+      municipalityDAO.query.schema ++
+      postingMethodDAO.query.schema ++
+      proprietorDAO.query.schema ++
+      provinceDAO.query.schema ++
+      regionDAO.query.schema ++
+      vatDAO.query.schema
 
     val writer = new java.io.PrintWriter("target/schema.sql")
     writer.write("# --- !Ups\n\n")

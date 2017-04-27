@@ -21,6 +21,9 @@ class FirmRepo @Inject()(
   def getByType(idFirmType: Int): Future[Seq[Firm]] =
     db.run(dao.query.filter(_.idFirmType === idFirmType).result)
 
+  def getByParent(idParent: Int): Future[Seq[Firm]] =
+    db.run(dao.query.filter(_.idParent === idParent).result)
+
   def find(id: Int): OptionT[Future, Firm] =
     OptionT(db.run(dao.query(id).result.headOption))
 

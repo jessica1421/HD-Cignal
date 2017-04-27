@@ -52,7 +52,7 @@ final private[models] class AccountDAO @Inject()(
       onDelete = ForeignKeyAction.Restrict)
 
     def subsidiaryAccount = foreignKey(
-      s"FK_ACCOUNT_MAIN_${tableName}",
+      s"FK_ACCOUNT_SUBSIDIARY_${tableName}",
       idSubsidiary,
       accountClassificationDAO.query)(
       _.id,

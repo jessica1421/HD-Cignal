@@ -54,7 +54,7 @@ class ContactInfoService @Inject()(
 
   def update(contactInfo: ContactInfo): OptionT[Future, Error] = OptionT {
     val id = contactInfo.id
-    val newName = contactInfo.name
+    val newName = contactInfo.value
     contactInfoRepo.exists(id) flatMap {exists =>
       if (exists) {
         contactInfoRepo.update(contactInfo) map { success =>

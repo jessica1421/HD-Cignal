@@ -2,7 +2,7 @@ package models.domain
 
 import play.api.libs.json._
 
-case class ContactInfo(name: String, idCompany: Int, optId: Option[Int]) {
+case class ContactInfo(value: String, idCompany: Int, optId: Option[Int] = None) {
   lazy val id: Int = optId.getOrElse(0)
   def toJson: JsObject = ContactInfo.Implicits.contactInfoJsonWrites.writes(this).as[JsObject]
 }
@@ -12,7 +12,7 @@ object ContactInfo {
   object Implicits {
     implicit val contactInfoJsonWrites = new Writes[ContactInfo] {
       def writes(ci: ContactInfo): JsValue = Json.obj(
-        "name" -> ci.name,
+        "value" -> ci.value,
         "idCompany" -> ci.idCompany,
         "id" -> ci.id
       )

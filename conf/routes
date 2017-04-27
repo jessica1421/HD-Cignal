@@ -6,3 +6,4 @@
 
 -> /accounts                       accounts.Routes
 -> /location                       location.Routes
+-> /firm                           firm.Routes

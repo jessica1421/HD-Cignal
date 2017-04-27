@@ -22,12 +22,12 @@ API HTTP Endpoints
 | PATCH   |
 | DELETE  |
 
-##Present Methods
 
-##FIRM
----
+## Present Methods
 
-####Fetch all firms
+### FIRM
+
+#### Fetch all firms
 
 **GET** `/firm`
 
@@ -50,7 +50,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch all firms by type
+#### Fetch all firms by type
 
 **GET** `/firm/{id}`
 
@@ -84,7 +84,7 @@ API HTTP Endpoints
 
 ---
 
-####Add firm
+#### Add firm
 
 **POST** `/firm`
 
@@ -126,7 +126,7 @@ API HTTP Endpoints
 
 ---
 
-####Update firm
+#### Update firm
 
 **PATCH** `/firm`
 
@@ -162,7 +162,7 @@ API HTTP Endpoints
 
 ---
 
-####Disable firm
+#### Disable firm
 
 **PATCH** `/firm`
 
@@ -186,7 +186,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch all firm types
+#### Fetch all firm types
 
 **GET** `/firm/type`
 
@@ -212,7 +212,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch firm type by ID
+#### Fetch firm type by ID
 
 **GET** `/firm/type/{id}`
 
@@ -227,7 +227,7 @@ API HTTP Endpoints
 
 ---
 
-####Update firm type
+#### Update firm type
 
 **PATCH** `/firm`
 
@@ -251,7 +251,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch all contacts
+#### Fetch all contacts
 
 **GET** `/firm/contactinfo`
 
@@ -273,7 +273,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch all contacts by firm ID
+#### Fetch all contacts by firm ID
 
 **GET** `/firm/contactinfo/{id}`
 
@@ -289,7 +289,7 @@ API HTTP Endpoints
 
 ---
 
-####Update contacts
+#### Update contacts
 
 **PATCH** `/firm/contactinfo`
 
@@ -314,7 +314,7 @@ API HTTP Endpoints
 
 ---
 
-####Delete contacts
+#### Delete contacts
 
 **DELETE** `/firm/contactinfo`
 
@@ -337,11 +337,11 @@ API HTTP Endpoints
 
 ---
 
-##LOCATION
+## LOCATION
 
 ---
 
-####Get all countries
+#### Get all countries
 
 **GET** `/location/country`
 
@@ -366,7 +366,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch municipality country by ID
+#### Fetch municipality country by ID
 
 **GET** `location/municipality/country/{id}`
 
@@ -402,7 +402,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch municipality region by ID
+#### Fetch municipality region by ID
 
 **GET** `/location/municipality/region/{id}`
 
@@ -434,7 +434,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch municipality province by ID
+#### Fetch municipality province by ID
 
 **GET** `/location/municipality/province/{id}`
 
@@ -462,7 +462,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch all provinces
+#### Fetch all provinces
 
 **GET** `/location/province`
 
@@ -484,7 +484,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch all regions
+#### Fetch all regions
 
 **GET** `/location/region`
 
@@ -506,9 +506,9 @@ API HTTP Endpoints
 
 ---
 
-##ACCOUNTS
+## ACCOUNTS
 
-####Fetch all accounting method
+#### Fetch all accounting method
 
 **GET** `/accounts/method`
 
@@ -531,7 +531,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch all accounting period
+#### Fetch all accounting period
 
 **GET** `/accounts/period`
 
@@ -543,7 +543,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch all Business Type
+#### Fetch all Business Type
 
 **GET** `/accounts/businesstype`
 
@@ -566,7 +566,7 @@ API HTTP Endpoints
 
 ---
 
-####Add Business Type
+#### Add Business Type
 
 **POST** `/accounts/businesstype`
 
@@ -589,7 +589,7 @@ API HTTP Endpoints
 
 ---
 
-####Update Business Type
+#### Update Business Type
 
 **PATCH** `/accounts/businesstype`
 
@@ -613,7 +613,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch VAT
+#### Fetch VAT
 
 **GET** `/accounts/vat`
 
@@ -636,7 +636,7 @@ API HTTP Endpoints
 
 ---
 
-####Fetch VAT by ID
+#### Fetch VAT by ID
 
 **GET** `/accounts/vat/{id}`
 
@@ -652,7 +652,7 @@ API HTTP Endpoints
 
 ---
 
-####Add VAT
+#### Add VAT
 
 **POST** `/accounts/vat`
 
@@ -676,7 +676,7 @@ API HTTP Endpoints
 
 ---
 
-####Update VAT
+#### Update VAT
 
 **PATCH** `/accounts/vat`
 

@@ -6,9 +6,7 @@ import play.api.libs.json._
 case class AccountingPeriod(
     idFirm: Int,
     startDate: Instant,
-    endDate: Instant,
-    optId: Option[Int] = None) {
-  lazy val id: Int = optId.getOrElse(-1)
+    endDate: Instant) {
   def toJson: JsObject = AccountingPeriod.Implicits.accountingPeriodJsonWrites.writes(this).as[JsObject]
 }
 // value for fiscla year
@@ -20,8 +18,7 @@ object AccountingPeriod {
       def writes(ap: AccountingPeriod): JsValue = Json.obj(
         "idFirm" -> ap.idFirm,
         "startDate" -> ap.startDate,
-        "endDate" -> ap.endDate,
-        "optId" -> ap.id
+        "endDate" -> ap.endDate
       )
     }
   }

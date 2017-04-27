@@ -7,7 +7,6 @@ case class Firm(
     address: String,
     postingPeriod: Short,
     accountingPeriodCode: Short,
-    `type`: String,
     idBusinessType: Int, // FK
     idVat: Int, //FK
     areaCode: Int, //FK
@@ -31,7 +30,6 @@ object Firm{
         "name" -> firm.name,
         "address" -> firm.address,
         "postingPeriod" -> firm.postingPeriod,
-        "type" -> firm.`type`,
         "idBusinessType" -> firm.idBusinessType,
         "idVat" -> firm.idVat,
         "areaCode" -> firm.areaCode,

@@ -13,5 +13,14 @@ class AccountingPeriodRepo @Inject()(
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
 
+  def exist(idFirm: Int): Future[Boolean] = db.run(dao.query(idFirm).exists.result)
+
   def get: Future[Seq[AccountingPeriod]] = db.run(dao.query.result)
+
+  def addOrUpdate(accountingPeriod: AccountingPeriod): Future[Int] =
+    db.run(dao.query.insertOrUpdate(accountingPeriod))
+
+  def delete(id: Int): Future[Int] =
+    db.run(dao.query(id).delete)
+
 }

@@ -13,5 +13,7 @@ class AccountingMethodRepo @Inject()(
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
 
+  def exists(code: String): Future[Boolean] = db.run(dao.query(code).exists.result)
+
   def get: Future[Seq[AccountingMethod]] = db.run(dao.query.result)
 }

@@ -12,10 +12,10 @@ final private[models] class ContactInfoDAO @Inject()(
 
   protected class ContactInfoTable(tag: Tag) extends Table[ContactInfo](tag, "CONTACTINFOS") {
     def value = column[String]("VALUE")
-    def idCompany = column[Int]("ID_COMPANY")
+    def idFirm = column[Int]("ID_FIRM")
     def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
 
-    def * = (value, idCompany, id.?) <> (ContactInfo.tupled, ContactInfo.unapply)
+    def * = (value, idFirm, id.?) <> (ContactInfo.tupled, ContactInfo.unapply)
   }
 
   private[models] object query extends TableQuery(new ContactInfoTable(_)) {

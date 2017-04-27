@@ -30,7 +30,6 @@ class FirmAPI @Inject() (
       "address" -> nonEmptyText,
       "postingPeriod" -> shortNumber,
       "accountingPeriodCode" -> shortNumber,
-      "type" -> nonEmptyText,
       "idBusinessType" -> number,
       "idVat" -> number,
       "areaCode" -> number,
@@ -55,7 +54,7 @@ class FirmAPI @Inject() (
       formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)),
       { case (a, b) =>
         service
-          .add(a, b)
+          .addFirm(a, b)
           .map(ServiceErrorHandler.json(_))
           .getOrElse(Created)
       }

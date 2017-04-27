@@ -15,12 +15,12 @@ Reload the page and apply `evolutions` after program compiling.
 API HTTP Endpoints
 ------
 
-Protocols|
-----------
-GET      |
-POST     |
-PATCH    |
-DELETE   |
+| PROTOCOLS|
+| -------- |
+| GET   |
+| POST    |
+| PATCH   |
+| DELETE  |
 
 ##Present Methods
 

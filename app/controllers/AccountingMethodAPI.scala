@@ -24,7 +24,7 @@ class AccountingMethodAPI @Inject() (
 
   def all = Action.async { implicit requests =>
     import models.domain.AccountingMethod.Implicits._
-    repo.get.map(r => Ok(Json.obj("accountingMethods" -> r)))
+    repo.get.map(r => Ok(Json.toJson(r)))
   }
 
 }

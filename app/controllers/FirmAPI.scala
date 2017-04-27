@@ -36,7 +36,7 @@ class FirmAPI @Inject() (
       "codePostingMethod" -> nonEmptyText,
       "idParent" -> optional(number),
       "idFirmType" -> number,
-      "idEnable" -> boolean,
+      "isEnable" -> boolean,
       "id" -> optional(number)
     )(Firm.apply)(Firm.unapply)
   )

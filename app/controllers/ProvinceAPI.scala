@@ -24,7 +24,7 @@ class ProvinceAPI @Inject() (
 
   def all = Action.async { implicit requests =>
     import models.domain.Province.Implicits._
-    repo.get.map(r => Ok(Json.obj("provinces" -> r)))
+    repo.get.map(r => Ok(Json.toJson(r)))
   }
 
 }

@@ -30,13 +30,16 @@ class VatRepo @Inject()(
   def updateValue(id: Int, value: Double): Future[Boolean] =
     db.run(dao.query(id).map(_.value).update(value).map( _ > 0))
 
-  def update(id: Int, newName: Option[String], newValue: Option[Double])
-    : Future[Unit] = db.run {
-    DBIO.seq(Seq(
-      newName.map(dao.query(id).map(_.name).update(_)),
-      newValue.map(dao.query(id).map(_.value).update(_)))
-    .collect({ case Some(action) => action}):_*)
-  }
+  // def update(vat: Vat)
+  //   : Future[Unit] = db.run {
+  //   DBIO.seq(Seq(
+  //     vat.name.map(dao.query(vat.id).map(_.name).update(_)),
+  //     vat.value.map(dao.query(vat.id).map(_.value).update(_)))
+  //   .collect({ case Some(action) => action}):_*)
+  // }
+
+  def update(vat: Vat): Future[Boolean] =
+    db.run(dao.query(vat.id).update(vat).map( _ > 0))
 
   def delete(id: Int): Future[Int] =
     db.run(dao.query(id).delete)

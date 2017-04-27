@@ -18,6 +18,9 @@ class ContactInfoRepo @Inject()(
 
   def get: Future[Seq[ContactInfo]] = db.run(dao.query.result)
 
+  def getByFirm(idCompany: Int): Future[Seq[ContactInfo]] =
+    db.run(dao.query.filter(_.idCompany === idCompany).result)
+
   def find(id: Int): OptionT[Future, ContactInfo] =
     OptionT(db.run(dao.query(id).result.headOption))
 

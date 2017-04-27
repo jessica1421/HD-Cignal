@@ -33,31 +33,49 @@ class MunicipalityAPI @Inject() (
     )(Municipality.apply)(Municipality.unapply)
   )
 
-  def getByCountry = Action.async { implicit request =>
+  def getByCountry(idCountry: Int) = Action.async { implicit request =>
     import models.domain.ContactInfo.Implicits._
-    Form("idCountry" -> number).bindFromRequest.fold(
-      formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)), {
-        service
-          .getByCountry(_)
-          .map(r => Ok(Json.obj("datas" -> r)))
-      })}
+    service
+      .getByCountry(idCountry)
+      .map { r =>
+        if(!r.isEmpty) {
+          Ok(Json.toJson(r))
+        } else {
+          NotFound(Json.obj(
+            "status" -> "failed",
+            "message" -> "NotFound"))
+        }
+      }
+  }
 
-  def getByRegion = Action.async { implicit request =>
+  def getByRegion(idRegion: Int) = Action.async { implicit request =>
     import models.domain.ContactInfo.Implicits._
-    Form("idRegion" -> number).bindFromRequest.fold(
-      formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)), {
-        service
-          .getByRegion(_)
-          .map(r => Ok(Json.obj("datas" -> r)))
-      })}
+    service
+      .getByRegion(idRegion)
+      .map { r =>
+        if(!r.isEmpty) {
+          Ok(Json.toJson(r))
+        } else {
+          NotFound(Json.obj(
+            "status" -> "failed",
+            "message" -> "NotFound"))
+        }
+      }
+  }
 
-  def getByProvince = Action.async { implicit request =>
+  def getByProvince(idProvince: Int) = Action.async { implicit request =>
     import models.domain.ContactInfo.Implicits._
-    Form("idProvince" -> number).bindFromRequest.fold(
-      formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)), {
-        service
-          .getByProvince(_)
-          .map(r => Ok(Json.obj("datas" -> r)))
-      })}
+    service
+      .getByProvince(idProvince)
+      .map { r =>
+        if(!r.isEmpty) {
+          Ok(Json.toJson(r))
+        } else {
+          NotFound(Json.obj(
+            "status" -> "failed",
+            "message" -> "NotFound"))
+        }
+      }
+  }
 
 }

@@ -4,30 +4,32 @@ import javax.inject.{ Inject, Singleton }
 import scala.concurrent.{ ExecutionContext, Future }
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import cats.data.OptionT
-import models.domain.Vat
+import models.domain.FirmType
+import models.dao.FirmTypeDAO
+import models.repo.FirmTypeRepo
 import errors._
 
 @Singleton
-class VatService @Inject()(
-    protected val vatRepo: models.repo.VatRepo,
+class FirmTypeService @Inject()(
+    protected val firmTypeRepo: FirmTypeRepo,
     protected val dbConfigProvider: DatabaseConfigProvider,
     protected implicit val ec: ExecutionContext)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
   private val logger = play.api.Logger(this.getClass())
 
-  def add(vat: Vat): OptionT[Future, Error] = OptionT {
-    vatRepo.exists(vat.id) flatMap {exists =>
+  def add(firmType: FirmType): OptionT[Future, Error] = OptionT {
+    firmTypeRepo.exists(firmType.id) flatMap {exists =>
       if (exists) {
-        logger.debug(s"Conflicts ${vat.id} in adding")
+        logger.debug(s"Conflicts ${firmType.id} in adding")
         Future.successful(Some(ObjectConflicts))
       } else {
-        vatRepo.add(vat) map { count =>
+        firmTypeRepo.add(firmType) map { count =>
           if (count == 1) {
-            logger.debug(s"Vat ${vat.id} successfully added")
+            logger.debug(s"Vat ${firmType.id} successfully added")
             None
           } else {
-            logger.error(s"Unknown error occurred in adding vat ${vat.id}")
+            logger.error(s"Unknown error occurred in adding firmType ${firmType.id}")
             Some(UnknownError)
           }
         }
@@ -35,14 +37,14 @@ class VatService @Inject()(
   }
 
   def delete(id: Int): OptionT[Future, Error] = OptionT {
-    vatRepo.exists(id) flatMap {exists =>
+    firmTypeRepo.exists(id) flatMap {exists =>
       if (exists) {
-        vatRepo.delete(id) map {count =>
+        firmTypeRepo.delete(id) map {count =>
           if (count == 1) {
             logger.debug(s"Vat $id Deleted ")
             None
           } else {
-            logger.error(s"Unknown error occurred in deleting vat $id")
+            logger.error(s"Unknown error occurred in deleting firmType $id")
             Some(UnknownError)
           }
         }
@@ -52,12 +54,13 @@ class VatService @Inject()(
     }}
   }
 
-  def update(vat: Vat): OptionT[Future, Error] = OptionT {
-    vatRepo.exists(vat.id) flatMap {exists =>
+  def update(firmType: FirmType)
+    : OptionT[Future, Error] = OptionT {
+    firmTypeRepo.exists(firmType.id) flatMap {exists =>
       if (exists) {
-        vatRepo.update(vat).map(r => None)
+        firmTypeRepo.update(firmType).map(r => None)
       } else {
-        logger.debug(s"Vat $vat.id NotFound")
+        logger.debug(s"firmType $firmType.id NotFound")
         Future.successful(Some(ObjectNotExists))
     }}
   }

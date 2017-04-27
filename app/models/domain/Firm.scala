@@ -13,7 +13,7 @@ case class Firm(
     codePostingMethod: String, //FK
     idParent: Option[Int], //FK
     idFirmType: Int, //FK
-    idEnable: Boolean, //FK
+    isEnable: Boolean, //FK
     optId: Option[Int] = None) {
   lazy val id: Int = optId.getOrElse(-1)
   lazy val accountingPeriod: String = if (accountingPeriod == 1) "FISCAL" else "CALENDAR"
@@ -36,6 +36,7 @@ object Firm{
         "codePostingMethod" -> firm.codePostingMethod,
         "idParent" -> firm.idParent,
         "idFirmType" -> firm.idFirmType,
+        "isEnable" -> firm.isEnable,
         "id" -> firm.id)
     }
   }

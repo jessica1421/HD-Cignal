@@ -6,10 +6,16 @@ import play.api.libs.json._
 case class AccountingPeriod(
     idFirm: Int,
     startDate: Instant,
-    endDate: Instant) {
+    endDate: Instant,
+    optId: Option[Int] = None ) {
+  lazy val id: Int  = optId.getOrElse(-1)
   def toJson: JsObject = AccountingPeriod.Implicits.accountingPeriodJsonWrites.writes(this).as[JsObject]
 }
-// value for fiscla year
+
+/**
+  ANNUAL: JAN - DEC
+  FISCAL: at least 12 mos
+*/
 
 object AccountingPeriod {
   val tupled = (apply _).tupled

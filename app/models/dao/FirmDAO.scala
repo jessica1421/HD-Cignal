@@ -22,7 +22,6 @@ final private[models] class FirmDAO @Inject()(
     def name = column[String]("NAME")
     def address = column[String]("ADDRESS")
     def postingPeriod = column[Short]("POSTING_PERIOD")
-    def accountingPeriodCode = column[Short]("ACCOUNTING_PERIOD")
     def idBusinessType = column[Int]("ID_BUSINESS_TYPE")
     def idVat = column[Int]("ID_VAT")
     def areaCode = column[Int]("AREA_CODE")
@@ -37,7 +36,6 @@ final private[models] class FirmDAO @Inject()(
       name,
       address,
       postingPeriod,
-      accountingPeriodCode,
       idBusinessType,
       idVat,
       areaCode,

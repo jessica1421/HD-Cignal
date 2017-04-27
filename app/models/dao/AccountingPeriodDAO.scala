@@ -17,8 +17,9 @@ final private[models] class AccountingPeriodDAO @Inject()(
     def idFirm = column[Int]("ID_FIRM",O.PrimaryKey)
     def startDate = column[Instant]("START_DATE")
     def endDate = column[Instant]("END_DATE")
+    def id = column[Int]("ID_FIRM", O.PrimaryKey, O.AutoInc)
 
-    def * = (idFirm, startDate, endDate) <> (AccountingPeriod.tupled, AccountingPeriod.unapply)
+    def * = (idFirm, startDate, endDate, id.?) <> (AccountingPeriod.tupled, AccountingPeriod.unapply)
 
     def firm = foreignKey(
       s"FK_FIRMS_${tableName}",

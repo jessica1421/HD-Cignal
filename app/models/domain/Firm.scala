@@ -6,7 +6,6 @@ case class Firm(
     name: String,
     address: String,
     postingPeriod: Short,
-    accountingPeriodCode: Short,
     idBusinessType: Int, // FK
     idVat: Int, //FK
     areaCode: Int, //FK

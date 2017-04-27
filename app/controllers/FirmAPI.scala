@@ -29,7 +29,6 @@ class FirmAPI @Inject() (
       "name" -> nonEmptyText,
       "address" -> nonEmptyText,
       "postingPeriod" -> shortNumber,
-      "accountingPeriodCode" -> shortNumber,
       "idBusinessType" -> number,
       "idVat" -> number,
       "areaCode" -> number,

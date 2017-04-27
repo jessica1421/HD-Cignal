@@ -1,0 +1,7 @@
+#
+# /firm
+#
+
+
+GET       /             controllers.FirmAPI.all
+POST      /             controllers.FirmAPI.add

@@ -3,15 +3,15 @@
 #
 
 # Country
-POST      /country                    controllers.BusinessTypeAPI.add
-PATCH     /country                    controllers.BusinessTypeAPI.update
-DELETE    /country                    controllers.BusinessTypeAPI.delete
-GET       /country                    controllers.BusinessTypeAPI.all
+POST      /country                    controllers.CountryAPI.add
+PATCH     /country                    controllers.CountryAPI.update
+DELETE    /country                    controllers.CountryAPI.delete
+GET       /country                    controllers.CountryAPI.all
 
 # Municipality
-GET       /municipality/country       controllers.MunicipalityAPI.getByCountry
-GET       /municipality/region        controllers.MunicipalityAPI.getByRegion
-GET       /municipality/province      controllers.MunicipalityAPI.getByProvince
+POST       /municipality/country       controllers.MunicipalityAPI.getByCountry
+POST       /municipality/region        controllers.MunicipalityAPI.getByRegion
+POST       /municipality/province      controllers.MunicipalityAPI.getByProvince
 
 # Province
 GET       /province                   controllers.ProvinceAPI.all

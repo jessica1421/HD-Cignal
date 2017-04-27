@@ -63,7 +63,7 @@ final private[models] class AccountDAO @Inject()(
       s"FK_ACCOUNT_FIRM_${tableName}",
       idFirm,
       firmDAO.query)(
-      _.id,
+      _.id.?,
       onUpdate = ForeignKeyAction.Cascade,
       onDelete = ForeignKeyAction.Restrict)
   }

@@ -15,7 +15,7 @@ final private[models] class MunicipalityDAO @Inject()(
     def name = column[String]("NAME")
     def areacode = column[Int]("AREACODE")
     def idProvince = column[Int]("ID_PROVINCE")
-    def id = column[Int]("ID", O.PrimaryKey)
+    def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
 
     def * = (name, areacode, idProvince, id.?) <> (Municipality.tupled, Municipality.unapply)
 

@@ -15,7 +15,7 @@ final private[models] class ProprietorDAO @Inject()(
     def name = column[String]("NAME")
     def share = column[Double]("SHARE")
     def idFirm = column[Int]("ID_FIRM")
-    def id = column[Int]("ID", O.PrimaryKey)
+    def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
 
     def * = (name, share, idFirm, id.?)<>(Proprietor.tupled, Proprietor.unapply)
 

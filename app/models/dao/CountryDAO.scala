@@ -12,7 +12,7 @@ final private[models] class CountryDAO @Inject()(
 
   protected class CountryTable(tag: Tag) extends Table[Country](tag, "COUNTRIES") {
     def name = column[String]("NAME")
-    def id = column[Int]("ID", O.PrimaryKey)
+    def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
 
     def * = (name, id.?) <> (Country.tupled, Country.unapply)
   }

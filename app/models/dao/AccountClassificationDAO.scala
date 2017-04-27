@@ -14,7 +14,7 @@ final private[models] class AccountClassificationDAO @Inject()(
     extends Table[AccountClassification](tag, "ACCOUNT_CLASSIFICATIONS") {
     def name = column[String]("NAME")
     def isMain = column[Boolean]("IS_MAIN")
-    def id = column[Int]("CODE", O.PrimaryKey)
+    def id = column[Int]("CODE", O.PrimaryKey, O.AutoInc)
 
     def * = (name, isMain, id.?) <> (AccountClassification.tupled, AccountClassification.unapply)
   }

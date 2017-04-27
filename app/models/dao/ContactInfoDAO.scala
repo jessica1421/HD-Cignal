@@ -11,11 +11,11 @@ final private[models] class ContactInfoDAO @Inject()(
   import driver.api._
 
   protected class ContactInfoTable(tag: Tag) extends Table[ContactInfo](tag, "CONTACTINFOS") {
-    def name = column[String]("NAME")
+    def value = column[String]("VALUE")
     def idCompany = column[Int]("ID_COMPANY")
-    def id = column[Int]("ID", O.PrimaryKey)
+    def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
 
-    def * = (name, idCompany, id.?) <> (ContactInfo.tupled, ContactInfo.unapply)
+    def * = (value, idCompany, id.?) <> (ContactInfo.tupled, ContactInfo.unapply)
   }
 
   private[models] object query extends TableQuery(new ContactInfoTable(_)) {

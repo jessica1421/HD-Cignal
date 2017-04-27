@@ -14,7 +14,7 @@ final private[models] class ProvinceDAO @Inject()(
   protected class ProvinceTable(tag: Tag) extends Table[Province](tag, "PROVINCES") {
     def name = column[String]("NAME")
     def idRegion = column[Int]("ID_REGION")
-    def id = column[Int]("ID", O.PrimaryKey)
+    def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
 
     def * = (name, idRegion, id.?) <> (Province.tupled, Province.unapply)
 

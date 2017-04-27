@@ -13,7 +13,7 @@ final private[models] class VatDAO @Inject()(
   protected class VatTable(tag: Tag) extends Table[Vat](tag, "VATS") {
     def name = column[String]("NAME")
     def value = column[Double]("VALUE")
-    def id = column[Int]("ID", O.PrimaryKey)
+    def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
 
     def * = (name, value, id.?) <> (Vat.tupled, Vat.unapply)
   }

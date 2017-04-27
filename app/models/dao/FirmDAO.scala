@@ -12,6 +12,7 @@ final private[models] class FirmDAO @Inject()(
     protected val municipalityDAO: MunicipalityDAO,
     protected val postingMethodDAO: PostingMethodDAO,
     protected val vatDAO: VatDAO,
+    protected val firmTypeDAO: FirmTypeDAO,
     protected val dbConfigProvider: DatabaseConfigProvider)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
@@ -29,6 +30,8 @@ final private[models] class FirmDAO @Inject()(
     def codeAccountingMethod = column[String]("CODE_ACCOUNTING_METHOD")
     def codePostingMethod = column[String]("CODE_POSTING_METHOD")
     def idParent = column[Option[Int]]("ID_PARENT")
+    def idFirmType = column[Int]("ID_FIRMTYPE")
+    def idEnable = column[Boolean]("IS_ENABLE")
     def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
 
     def * = (
@@ -43,6 +46,8 @@ final private[models] class FirmDAO @Inject()(
       codeAccountingMethod,
       codePostingMethod,
       idParent,
+      idFirmType,
+      idEnable,
       id.?) <> (Firm.tupled, Firm.unapply)
 
     def accountingMethod = foreignKey(
@@ -74,6 +79,14 @@ final private[models] class FirmDAO @Inject()(
       codePostingMethod,
       postingMethodDAO.query)(
       _.code,
+      onUpdate = ForeignKeyAction.Cascade,
+      onDelete = ForeignKeyAction.Restrict)
+
+    def firmType = foreignKey(
+      s"FK_FIRM_TYPE_${tableName}",
+      idFirmType,
+      firmTypeDAO.query)(
+      _.id,
       onUpdate = ForeignKeyAction.Cascade,
       onDelete = ForeignKeyAction.Restrict)
   }

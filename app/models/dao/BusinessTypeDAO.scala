@@ -12,7 +12,7 @@ final private[models] class BusinessTypeDAO @Inject()(
 
   protected class BusinessTypeTable(tag: Tag) extends Table[BusinessType](tag, "BUSINESSTYPES") {
     def name = column[String]("NAME")
-    def id = column[Int]("ID", O.PrimaryKey)
+    def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
 
     def * = (name, id.?) <> (BusinessType.tupled, BusinessType.unapply)
   }

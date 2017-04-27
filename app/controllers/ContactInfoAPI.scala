@@ -62,10 +62,10 @@ class ContactInfoAPI @Inject() (
     )
   }
 
-  def getByFirm(id: Int) = Action.async { implicit requests =>
+  def getByFirm(idParent: Int) = Action.async { implicit requests =>
     import models.domain.ContactInfo.Implicits._
     repo
-      .getByFirm(id)
+      .getByFirm(idParent)
       .map(r => Ok(Json.toJson(r)))
   }
 

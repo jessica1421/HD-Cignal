@@ -61,22 +61,19 @@ class BusinessTypeAPI @Inject() (
     )
   }
 
-  def find = Action.async { implicit requests =>
+  def find(id: Int) = Action.async { implicit requests =>
     import models.domain.BusinessType.Implicits._
-    Form("id" -> number).bindFromRequest.fold(
-      formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)), {
-        repo
-          .find(_)
-          .map(r => Ok(r.toJson))
-          .getOrElse(NotFound)
-
-      }
-    )
+    repo
+      .find(id)
+      .map(r => Ok(r.toJson))
+      .getOrElse(NotFound(Json.obj(
+        "status" -> "failed",
+        "message" -> "NotFound")))
   }
 
   def all = Action.async { implicit requests =>
     import models.domain.BusinessType.Implicits._
-    repo.get.map(r => Ok(Json.obj("businessTypes" -> r)))
+    repo.get.map(r => Ok(Json.toJson(r)))
   }
 
 }

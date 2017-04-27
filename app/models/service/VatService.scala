@@ -52,13 +52,12 @@ class VatService @Inject()(
     }}
   }
 
-  def update(id: Int, newName: Option[String], newValue: Option[Double])
-    : OptionT[Future, Error] = OptionT {
-    vatRepo.exists(id) flatMap {exists =>
+  def update(vat: Vat): OptionT[Future, Error] = OptionT {
+    vatRepo.exists(vat.id) flatMap {exists =>
       if (exists) {
-        vatRepo.update(id, newName, newValue).map(r => None)
+        vatRepo.update(vat).map(r => None)
       } else {
-        logger.debug(s"Vat $id NotFound")
+        logger.debug(s"Vat $vat.id NotFound")
         Future.successful(Some(ObjectNotExists))
     }}
   }

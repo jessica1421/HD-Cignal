@@ -64,7 +64,16 @@ class CountryAPI @Inject() (
 
   def all = Action.async { implicit requests =>
     import models.domain.Country.Implicits._
-    repo.get.map(r => Ok(Json.obj("countries" -> r)))
+    repo.get.map(r => Ok(Json.toJson(r)))
+  }
+
+  def find(id: Int) = Action.async { implicit requests =>
+    import models.domain.Country.Implicits._
+    repo.get.map(r => Ok(Json.toJson(r)))
+    repo
+      .find(id)
+      .map(r => Ok(r.toJson))
+      .getOrElse(NotFound)
   }
 
 }

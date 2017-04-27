@@ -62,22 +62,16 @@ class ContactInfoAPI @Inject() (
     )
   }
 
-  def find = Action.async { implicit requests =>
+  def getByFirm(id: Int) = Action.async { implicit requests =>
     import models.domain.ContactInfo.Implicits._
-    Form("id" -> number).bindFromRequest.fold(
-      formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)), {
-        repo
-          .find(_)
-          .map(r => Ok(r.toJson))
-          .getOrElse(NotFound)
-
-      }
-    )
+    repo
+      .getByFirm(id)
+      .map(r => Ok(Json.toJson(r)))
   }
 
   def all = Action.async { implicit requests =>
     import models.domain.ContactInfo.Implicits._
-    repo.get.map(r => Ok(Json.obj("contactInfos" -> r)))
+    repo.get.map(r => Ok(Json.toJson(r)))
   }
 
 }

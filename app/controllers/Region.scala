@@ -24,7 +24,7 @@ class RegionAPI @Inject() (
 
   def all = Action.async { implicit requests =>
     import models.domain.Region.Implicits._
-    repo.get.map(r => Ok(Json.obj("regions" -> r)))
+    repo.get.map(r => Ok(Json.toJson(r)))
   }
 
 }

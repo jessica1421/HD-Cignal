@@ -3,5 +3,18 @@
 #
 
 
-GET       /             controllers.FirmAPI.all
-POST      /             controllers.FirmAPI.add
+GET       /               controllers.FirmAPI.all
+POST      /               controllers.FirmAPI.add
+# POST      /:idType        controllers.FirmAPI.add(idType: Int) Get all firms by idType
+
+# Firm Type
+GET       /type           controllers.FirmTypeAPI.all
+GET       /type/:id       controllers.FirmTypeAPI.find(id: Int)
+PATCH     /type           controllers.FirmTypeAPI.update
+
+# Contact Info
+POST      /contactinfo        controllers.ContactInfoAPI.add
+PATCH     /contactinfo        controllers.ContactInfoAPI.update
+DELETE    /contactinfo        controllers.ContactInfoAPI.delete
+GET       /contactinfo/:id    controllers.ContactInfoAPI.getByFirm(id: Int)
+GET       /contactinfo        controllers.ContactInfoAPI.all

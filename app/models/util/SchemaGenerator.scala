@@ -14,6 +14,7 @@ class SchemaGenerator @Inject()(
     protected val contactInfoDAO: ContactInfoDAO,
     protected val countryDAO: CountryDAO,
     protected val firmDAO: FirmDAO,
+    protected val firmTypeDAO: FirmTypeDAO,
     protected val municipalityDAO: MunicipalityDAO,
     protected val postingMethodDAO: PostingMethodDAO,
     protected val proprietorDAO: ProprietorDAO,
@@ -33,6 +34,7 @@ class SchemaGenerator @Inject()(
       contactInfoDAO.query.schema ++
       countryDAO.query.schema ++
       firmDAO.query.schema ++
+      firmTypeDAO.query.schema ++
       municipalityDAO.query.schema ++
       postingMethodDAO.query.schema ++
       proprietorDAO.query.schema ++

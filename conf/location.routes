@@ -7,11 +7,12 @@ POST      /country                    controllers.CountryAPI.add
 PATCH     /country                    controllers.CountryAPI.update
 DELETE    /country                    controllers.CountryAPI.delete
 GET       /country                    controllers.CountryAPI.all
+GET       /country/:id                controllers.CountryAPI.find(id: Int)
 
 # Municipality
-POST       /municipality/country       controllers.MunicipalityAPI.getByCountry
-POST       /municipality/region        controllers.MunicipalityAPI.getByRegion
-POST       /municipality/province      controllers.MunicipalityAPI.getByProvince
+GET       /municipality/country/:id       controllers.MunicipalityAPI.getByCountry(id: Int)
+GET       /municipality/region/:id        controllers.MunicipalityAPI.getByRegion(id: Int)
+GET       /municipality/province/:id      controllers.MunicipalityAPI.getByProvince(id: Int)
 
 # Province
 GET       /province                   controllers.ProvinceAPI.all

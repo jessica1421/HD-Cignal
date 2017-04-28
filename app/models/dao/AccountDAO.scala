@@ -72,3 +72,15 @@ final private[models] class AccountDAO @Inject()(
     @inline def apply(id: Int) = this.withFilter(_.id === id)
   }
 }
+
+/**
+  standard code <-
+    standard
+    posting-code(3)
+    custom-code(A-Z, 1 - 0, ~- )
+
+
+  Normal Balance
+    - Debit
+    - Credit
+*/

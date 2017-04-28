@@ -91,3 +91,8 @@ final private[models] class FirmDAO @Inject()(
     @inline def apply(id: Int) = this.withFilter(_.id === id)
   }
 }
+
+/**
+  Notes:
+    Trade name for each company // possible holding
+*/

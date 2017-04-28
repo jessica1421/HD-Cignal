@@ -13,8 +13,8 @@ case class AccountingPeriod(
 }
 
 /**
-  ANNUAL: JAN - DEC
-  FISCAL: at least 12 mos
+  FISCAL: JAN - DEC
+  CALENDAR: at least 12 mos
 */
 
 object AccountingPeriod {
@@ -29,3 +29,5 @@ object AccountingPeriod {
     }
   }
 }
+
+

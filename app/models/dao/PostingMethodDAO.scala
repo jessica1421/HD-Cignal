@@ -20,3 +20,15 @@ final private[models] class PostingMethodDAO @Inject()(
     @inline def apply(code: String) = this.withFilter(_.code === code)
   }
 }
+
+/**
+  Note:
+    CHANGEABLE
+      BATCH
+      REALTIME
+
+    POSTING:
+      Receipt
+      Disburse
+      Journal
+*/

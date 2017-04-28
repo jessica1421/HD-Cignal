@@ -13,7 +13,7 @@ class AccountingPeriodRepo @Inject()(
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
 
-  def exist(idFirm: Int): Future[Boolean] = db.run(dao.query(idFirm).exists.result)
+  def exists(idFirm: Int): Future[Boolean] = db.run(dao.query(idFirm).exists.result)
 
   def get: Future[Seq[AccountingPeriod]] = db.run(dao.query.result)
 

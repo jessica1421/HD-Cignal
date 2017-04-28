@@ -22,3 +22,8 @@ final private[models] class VatDAO @Inject()(
     @inline def apply(id: Int) = this.withFilter(_.id === id)
   }
 }
+
+/**
+  Note:
+    VAT class + Nature of company / Business Nature
+*/

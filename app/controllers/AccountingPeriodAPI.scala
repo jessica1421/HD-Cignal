@@ -45,6 +45,10 @@ class AccountingPeriodAPI @Inject() (
     accountingPeriodForm.bindFromRequest.fold(
       formWithErrors => Future.successful(BadRequest(formWithErrors.errorsAsJson)),
       { case (idFirm, startDate, endDate, id) =>
+        /**
+          Mic
+            Check daw if pwd ba ni.. Long to Instant
+        */
         val start = Instant.ofEpochMilli(startDate)
         val end = Instant.ofEpochMilli(endDate)
         service
